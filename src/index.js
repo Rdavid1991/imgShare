@@ -2,7 +2,7 @@ require('colors');
 const express = require('express');
 const config = require('./server/config');
 
-require('./database');
+//require('./database');
 
 const app = config(express());
 
