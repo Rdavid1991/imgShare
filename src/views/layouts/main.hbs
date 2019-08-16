@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{!-- Bootstrap --}}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {{!-- Custom CSS --}}
+    <link rel="stylesheet" href="/public/css/style.css">
+    {{!-- Font Awesome --}}
+    <link rel="stylesheet" href="/public/fontawesome/css/all.css">
+    <script src="/public/fontawesome/js/all.js"></script>
+
+    <title>ImgShare</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="/" class="navbar-brand">
+            <img src="/public/images/imgshare-logo.png" alt="ImgShare">
+        </a>
+    </nav>
+
+    <div class="container-fluid p-4">
+        <div class="row">
+            <div class="col-md-8">
+                {{{ body }}}
+            </div>
+            <div class="col-md-4">
+                
+            </div>
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
