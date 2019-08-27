@@ -12,7 +12,7 @@
                     <div class="custom-file">
                         <input type="file" name="image" class="custom-file-input" id="inputGroup"
                             aria-describedby="inputGroupFileAddon" required>
-                        <label class="custom-file-label" for="inputGroupFile">Chose file</label>
+                        <label class="custom-file-label" for="inputGroupFile">Chosse file</label>
                     </div>
                 </div>
             </div>
@@ -41,14 +41,12 @@
             <div class="row">
                 {{#each images}}
                     <div class="col-md-4">
-                        <a href="">
+                        <a href="/images/{{uniqueId}}">
                             <img src="/public/upload/{{filename}}" alt="" class="w-100 h-100 img-thumbnail">
                         </a>
                     </div>
                 {{/each}}
             </div>
-
         </div>
-
     </div>
-</div>
+</div pato>
