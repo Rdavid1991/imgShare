@@ -1,20 +1,21 @@
 const path = require('path');
 const fs = require('fs-extra');
+const md5 = require('md5');
 
 const libs = require('../helpers/libs')
-const { Image } = require('../models');
+const { Image, Comment } = require('../models');
 
 const ctrl = {};
 
-ctrl.index = async (req, res) => {
-    const image = await Image.findOne({ filename: { $regex: req.params.image_id } })
-    res.render('image',{image})
+ctrl.index = async(req, res) => {
+    const image = await Image.findOne({ filename: { $regex: String(req.params.image_id) } })
+    res.render('image', { image })
 }
 
 ctrl.create = (req, res) => {
     //this function create images
 
-    const saveImage = async () => {
+    const saveImage = async() => {
         const imageUrl = libs.randomNumber();
         const images = Image.find({ filename: imageUrl });
 
@@ -50,8 +51,16 @@ ctrl.like = (req, res) => {
     res.send('index page')
 }
 
-ctrl.comment = (req, res) => {
-    res.send('index page')
+ctrl.comment = async(req, res) => {
+    const image = await Image.findOne({ filename: { $regex: String(req.params.images_id) } })
+
+    if (image) {
+        const newComment = new Comment(req.body)
+        newComment.gravatar = md5(newComment.email);
+        newComment.image_id = image._id
+        await newComment.save()
+        res.send('/images/' + image.uniqueId)
+    }
 }
 
 ctrl.remove = (req, res) => {
