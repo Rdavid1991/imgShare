@@ -9,13 +9,12 @@ const ctrl = {};
 
 ctrl.index = async(req, res) => {
     const image = await Image.findOne({ filename: { $regex: String(req.params.image_id) } })
-    const comments = await Comment.find({ image_id: image_id })
+    const comments = await Comment.find({ image_id: image._id })
     res.render('image', { image, comments })
 }
 
 ctrl.create = (req, res) => {
     //this function create images
-
     const saveImage = async() => {
         const imageUrl = libs.randomNumber();
         const images = Image.find({ filename: imageUrl });

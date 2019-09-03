@@ -3,15 +3,16 @@ version: "3"
 services:
 
   mongo:
+    container_name: mongo
     image: mongo
     ports: 
       - "27017:27017" 
 
   app:
     container_name: appnode
-    restart: always
+    #restart: always
     build: .
     ports:
       - "3000:3000"
-    links:
+    depends_on:
       - mongo
