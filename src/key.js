@@ -4,7 +4,7 @@ use object of javaScript for indentify the keys
 */
 
 module.exports = {
-    database:{
-        URI: 'mongodb://localhost:27017/imgshare'
+    database: {
+        URI: 'mongodb://mongo:27017/imgshare'
     }
 }
