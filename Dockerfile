@@ -1,6 +1,8 @@
-FROM node:10
+FROM alpine
 
-WORKDIR /app
+RUN apk add --update nodejs npm
+
+WORKDIR /home/app
 
 COPY package*.json ./
 

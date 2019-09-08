@@ -6,13 +6,12 @@ services:
     container_name: mongo
     image: mongo
     ports: 
-      - "27017:27017" 
+      - "27018:27017" 
 
   app:
     container_name: appnode
-    #restart: always
-    build: .
+    image: imgshare
     ports:
-      - "3000:3000"
+      - "3001:3000"
     depends_on:
       - mongo
