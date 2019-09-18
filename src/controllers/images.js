@@ -2,16 +2,16 @@ const path = require('path');
 const fs = require('fs-extra');
 const md5 = require('md5');
 
-const libs = require('../helpers/libs')
+const libs = require('../helpers/libs');
 const { Image, Comment } = require('../models');
 
 const ctrl = {};
 
 ctrl.index = async(req, res) => {
-    const image = await Image.findOne({ filename: { $regex: String(req.params.image_id) } })
-    const comments = await Comment.find({ image_id: image._id })
-    res.render('image', { image, comments })
-}
+    const image = await Image.findOne({ filename: { $regex: String(req.params.image_id) } });
+    const comments = await Comment.find({ image_id: image._id });
+    res.render('image', { image, comments });
+};
 
 ctrl.create = (req, res) => {
     //this function create images
@@ -25,7 +25,7 @@ ctrl.create = (req, res) => {
 
             const imageTempPath = req.file.path;
             const ext = path.extname(req.file.originalname).toLowerCase();
-            const targetPath = path.resolve(`src/public/upload/${imageUrl}${ext}`)
+            const targetPath = path.resolve(`src/public/upload/${imageUrl}${ext}`);
 
             console.log(req.file);
 
@@ -35,36 +35,36 @@ ctrl.create = (req, res) => {
                     title: req.body.title,
                     filename: imageUrl + ext,
                     description: req.body.description
-                })
+                });
                 const imageSaved = await newImage.save();
                 res.redirect('/images/' + imageUrl);
             } else {
                 await fs.unlink(imageTempPath);
-                res.status(500).json({ error: 'only images are allowed' })
+                res.status(500).json({ error: 'only images are allowed' });
             }
         }
-    }
+    };
     saveImage();
-}
+};
 
 ctrl.like = (req, res) => {
-    res.send('index page')
-}
+    res.send('index page');
+};
 
 ctrl.comment = async(req, res) => {
-    const image = await Image.findOne({ filename: { $regex: String(req.params.images_id) } })
+    const image = await Image.findOne({ filename: { $regex: String(req.params.images_id) } });
 
     if (image) {
-        const newComment = new Comment(req.body)
+        const newComment = new Comment(req.body);
         newComment.gravatar = md5(newComment.email);
-        newComment.image_id = image._id
-        await newComment.save()
-        res.send('/images/' + image.uniqueId)
+        newComment.image_id = image._id;
+        await newComment.save();
+        res.send('/images/' + image.uniqueId);
     }
-}
+};
 
 ctrl.remove = (req, res) => {
-    res.send('index page')
-}
+    res.send('index page');
+};
 
 module.exports = ctrl;
