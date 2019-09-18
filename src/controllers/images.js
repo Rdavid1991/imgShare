@@ -53,13 +53,12 @@ ctrl.like = (req, res) => {
 
 ctrl.comment = async(req, res) => {
     const image = await Image.findOne({ filename: { $regex: String(req.params.images_id) } });
-
     if (image) {
         const newComment = new Comment(req.body);
         newComment.gravatar = md5(newComment.email);
         newComment.image_id = image._id;
         await newComment.save();
-        res.send('/images/' + image.uniqueId);
+        res.redirect('/images/' + image.uniqueId);
     }
 };
 
