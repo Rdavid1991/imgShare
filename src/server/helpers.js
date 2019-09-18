@@ -1,7 +1,7 @@
 const moment = require('moment');
 
-module.exports = helpers = {
-    timeago: timestamp =>{
+module.exports = {
+    timeago: timestamp => {
         return moment(timestamp).startOf('minute').fromNow();
     }
-}
+};

@@ -7,4 +7,4 @@ module.exports = {
     database: {
         URI: 'mongodb://mongo:27017/imgshare'
     }
-}
+};

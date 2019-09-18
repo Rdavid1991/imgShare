@@ -13,15 +13,15 @@ module.exports = app => {
     app.set('port', process.env.port || 3000);
 
     //Config of view engine 'express-handlebars'
-    app.set('views', path.join(__dirname, '../views'))
+    app.set('views', path.join(__dirname, '../views'));
     app.engine('.hbs', exphbs({
         defaultLayout: 'main',
         partialsDir: path.join(app.get('views'), 'partials'),
         layoutsDir: path.join(app.get('views'), 'layouts'),
         extname: '.hbs',
         helpers: require('./helpers')
-    }))
-    app.set('view engine', '.hbs')
+    }));
+    app.set('view engine', '.hbs');
 
     //middlewares
     app.use(morgan('dev'));
@@ -36,15 +36,15 @@ module.exports = app => {
     app.use(express.json());
 
     //routes
-    routes(app)
+    routes(app);
 
     //static files
-    app.use('/public', express.static(path.join(__dirname, '../public')))
+    app.use('/public', express.static(path.join(__dirname, '../public')));
 
     //errorhandler
     if ('development' === app.get('env')) {
-        app.use(errorhandler)
+        app.use(errorhandler);
     }
 
     return app;
-}
+};

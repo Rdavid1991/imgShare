@@ -33,12 +33,21 @@ pipeline {
         }
 
         stage('Deploy'){
-            when{ expression{ params.Action == 'Build' || params.Action == 'Deploy' }}
+            when{ expression{ params.Action == 'Build' || params.Action == 'Up' || params.Action == 'Down' || params.Action == 'Prune'}}
             steps{
-                /*bat 'docker system prune -f'
-                bat 'docker volume prune -f' */
-                bat 'docker-compose down'
-                bat 'docker-compose up -d'
+                script{
+                    if(params.Action == 'Build'){
+                        bat 'docker-compose down'
+                        bat 'docker-compose up -d'
+                    }else if(params.Action == 'Up'){
+                        bat 'docker-compose up -d'
+                    }else if(params.Action == 'Down'){
+                        bat 'docker-compose down'
+                    }else if(params.Action == 'Prune'){
+                        bat 'docker system prune -f'
+                        bat 'docker volume prune -f'
+                    }
+                }
             }
         } 
     }

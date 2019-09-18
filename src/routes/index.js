@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const home = require('../controllers/home')
-const images = require('../controllers/images')
+const home = require('../controllers/home');
+const images = require('../controllers/images');
 
 module.exports = app => {
 
@@ -14,4 +14,4 @@ module.exports = app => {
     router.delete('/images/:images_id', images.remove);
 
     app.use(router);
-}
+};
