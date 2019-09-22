@@ -21,6 +21,6 @@ const commentSchema = new Schema({
         type: Date,
         default: Date.now
     }
-})
+});
 
 module.exports = model('comment', commentSchema);
