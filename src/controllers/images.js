@@ -46,6 +46,7 @@ ctrl.create = (req, res) => {
                     filename: imageUrl + ext,
                     description: req.body.description
                 });
+                // eslint-disable-next-line no-unused-vars
                 const imageSaved = await newImage.save();
                 res.redirect('/images/' + imageUrl);
             } else {
