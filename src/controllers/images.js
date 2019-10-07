@@ -80,7 +80,13 @@ module.exports = {
         }
     },
 
-    remove: (req, res) => {
-        res.send('index page');
+    remove: async (req, res) => {
+        const image = await Image.findOne({filename: {$regex: String(req.params.images_id)}});
+        if(image){
+            await fs.unlink(path.resolve('./src/public/upload/'+ image.filename));
+            await Comment.deleteOne({image_id: image._id});
+            await image.remove();
+            res.json(true);
+        }
     }
 };
