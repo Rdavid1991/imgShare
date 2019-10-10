@@ -23,4 +23,11 @@ const commentSchema = new Schema({
     }
 });
 
+commentSchema.virtual('image')
+    .set(function(image) {
+        this._image = image;
+    }).get(function() {
+        return this._image;
+    });
+
 module.exports = model('comment', commentSchema);

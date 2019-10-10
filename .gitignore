@@ -1,3 +1,4 @@
 /node_modules
 imgshare.code-workspace
 /src/public/upload
+.env

@@ -1,4 +1,4 @@
-const { Comment, Image } = require('../models')
+const { Comment, Image } = require('../models');
 
 module.exports = {
     async newest() {
@@ -7,10 +7,10 @@ module.exports = {
             .sort({ timestamp: -1 });
 
         for (const comment of comments) {
-            const image = Image.findOne({ _id: comment.image_id });
+            const image = await Image.findOne({ _id: comment.image_id });
             comment.image = image;
         }
 
         return comments;
     }
-}
+};
