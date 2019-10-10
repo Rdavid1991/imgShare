@@ -4,10 +4,11 @@ const md5 = require('md5');
 
 const libs = require('../helpers/libs');
 const { Image, Comment } = require('../models');
+const sidebar = require('../helpers/sidebar');
 
 module.exports = {
     index: async (req, res) => {
-        const viewModel = { image: {}, comments: {} };
+        let viewModel = { image: {}, comments: {} };
         const image = await Image.findOne({ filename: { $regex: String(req.params.image_id) } });
         if (image) {
             image.views = image.views + 1;
@@ -15,6 +16,7 @@ module.exports = {
             await image.save();
             const comments = await Comment.find({ image_id: image._id });
             viewModel.comments = comments;
+            viewModel = await sidebar(viewModel);
             res.render('image', viewModel);
         } else {
             res.redirect("/");
