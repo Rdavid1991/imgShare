@@ -22,20 +22,17 @@
         <a href="/" class="navbar-brand">
             <img src="/public/images/imgshare-logo.png" alt="ImgShare">
         </a>
+
+        <div>
+            <a href="/signup" class="">Sign Up</a>
+            <a href="/signin" class="">Sign In</a>
+        </div>
     </nav>
 
     <div class="container-fluid p-4">
         <div class="row">
-            <div class="col-md-8">
-                {{{ body }}}
-            </div>
-            <div class="col-md-4">
-                {{>stats}}
-                {{>popular}}
-                {{>comments}}
-            </div>
+            {{{ body }}}
         </div>
-
     </div>
 
     {{!-- Script --}}

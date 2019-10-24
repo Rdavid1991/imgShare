@@ -7,7 +7,8 @@ const auth = require('../controllers/auth');
 
 module.exports = app => {
 
-    router.get('/', home.index);
+    router.get('/', home.home);
+    router.get('/profile', isAuthenticate, home.index);
     router.get('/images/:image_id', images.index);
     router.post('/images', images.create);
     router.post('/images/:images_id/like', images.like);
@@ -19,9 +20,16 @@ module.exports = app => {
 
     router.get('/signin', auth.signin);
     router.post('/signin', auth.signinLogin);
-    router.get('/logout', auth.logout);
 
-    router.get('/profile', auth.profile);
+    router.get('/*logout', auth.logout);
+    router.get('/profile', isAuthenticate, auth.profile);
 
     app.use(router);
 };
+
+function isAuthenticate(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/');
+}

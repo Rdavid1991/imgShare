@@ -15,7 +15,11 @@ async function imageTotalViewsCounters() {
             viewsTotal: { $sum: '$views' }
         }
     }]);
-    return result[0].viewsTotal;
+
+    if (result.length > 0) {
+        return result[0].viewsTotal;
+    }
+    return 0;
 }
 
 async function likesTotalCounter() {
@@ -25,7 +29,10 @@ async function likesTotalCounter() {
             likestotal: { $sum: '$likes' }
         }
     }]);
-    return result[0].likestotal;
+    if (result.length > 0) {
+        return result[0].likestotal;
+    }
+    return 0;
 }
 
 module.exports = async() => {
