@@ -4,6 +4,7 @@ const express = require('express');
 const config = require('./server/config');
 
 require('./database');
+require('./passport/local-auth');
 require('colors');
 
 const app = config(express());

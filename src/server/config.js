@@ -3,7 +3,9 @@ const exphbs = require('express-handlebars');
 const morgan = require('morgan');
 const multer = require('multer');
 const express = require('express');
-const errorhandler = require('errorhandler');
+const passport = require('passport');
+const session = require('express-session');
+const flash = require('connect-flash');const errorhandler = require('errorhandler');
 
 const routes = require('../routes/index');
 
@@ -28,6 +30,19 @@ module.exports = app => {
     app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
     app.use('/public', express.static(path.join(__dirname, '../public')));
+    app.use(session({
+        secret: 'mysecretsession',
+        resave: false,
+        saveUninitialized: false
+    }));
+    app.use(flash());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use((req, res, next) => {
+        app.locals.signupMessage = req.flash('signupMessage');
+        app.locals.signinMessage = req.flash('signinMessage');
+        next();
+    });
 
     //routes
     routes(app);
@@ -36,6 +51,5 @@ module.exports = app => {
     if ('development' === app.get('env')) {
         app.use(errorhandler);
     }
-
     return app;
 };
