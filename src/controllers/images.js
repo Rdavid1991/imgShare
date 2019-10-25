@@ -10,12 +10,21 @@ module.exports = {
     index: async(req, res) => {
         let viewModel = { image: {}, comments: {} };
         const image = await Image.findOne({ filename: { $regex: String(req.params.image_id) } });
+
+        if (req.user) {
+            const user = await UserLike.findOne({ user: req.user.email, imgId: String(image._id) });
+            if (user) {
+                viewModel.status = user.status;
+            }
+        }
+
         if (image) {
             image.views = image.views + 1;
             viewModel.image = image;
             await image.save();
             const comments = await Comment.find({ image_id: image._id });
             viewModel.comments = comments;
+
             viewModel = await sidebar(viewModel);
             res.render('image', viewModel);
         } else {
@@ -61,15 +70,15 @@ module.exports = {
 
     like: async(req, res) => {
 
-        if (req.user.email !== undefined) {
+        if (req.user) {
             const img = await Image.findOne({ filename: { $regex: String(req.params.images_id) } });
-            const user = await UserLike.findOne({ user: req.user.email });
+            const user = await UserLike.findOne({ user: req.user.email, imgId: String(img._id) });
             if (user) {
                 if (img) {
-                    if (user.imgId == img._id && user.status === true) {
+                    if (user.status === true) {
                         img.likes = img.likes - 1;
                         user.status = false;
-                    } else if (user.imgId == img._id && user.status === false) {
+                    } else if (user.status === false) {
                         img.likes = img.likes + 1;
                         user.status = true;
                     }
@@ -78,15 +87,17 @@ module.exports = {
                 }
                 await user.save();
                 await img.save();
-                res.json({ like: img.likes });
+                res.json({ like: img.likes, status: user.status });
             } else {
                 const newuser = new UserLike({
                     imgId: img._id,
                     user: req.user.email,
                     status: true,
                 });
-                newuser.save();
                 img.likes = img.likes + 1;
+                await img.save();
+                await newuser.save();
+                res.json({ like: img.likes, status: newuser.status });
             }
         }
     },

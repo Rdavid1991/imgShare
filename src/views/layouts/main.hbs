@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/public/css/style.css">
     {{!-- Font Awesome --}}
     <link rel="stylesheet" href="/public/fontawesome/css/all.css">
+    <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
     <script src="/public/fontawesome/js/all.js"></script>
 
     <title>ImgShare</title>
@@ -19,14 +20,18 @@
 
 <body>
     <nav class="navbar navbar-dark bg-dark">
-        <a href="/" class="navbar-brand">
-            <img src="/public/images/imgshare-logo.png" alt="ImgShare">
-        </a>
-
+        <a href="/" class="navbar-brand"><img src="/public/images/imgshare-logo.png" alt="ImgShare"></a>
+        {{#if user}}
+        <div>
+            <a href="/logout" class="">Logout</a>
+            <a href="/profile" class="">Perfil</a>
+        </div>
+        {{else}}
         <div>
             <a href="/signup" class="">Sign Up</a>
             <a href="/signin" class="">Sign In</a>
         </div>
+        {{/if}}
     </nav>
 
     <div class="container-fluid p-4">

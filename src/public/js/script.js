@@ -15,6 +15,12 @@ $('#btn-like').click(function(e) {
         .done(data => {
             // eslint-disable-next-line no-undef
             $('.likes-count').text(data.like);
+
+            if (data.status) {
+                $('#btn-like').removeClass('btn-secondary').addClass('btn-primary');
+            } else {
+                $('#btn-like').removeClass('btn-primary').addClass('btn-secondary');
+            }
         });
 });
 

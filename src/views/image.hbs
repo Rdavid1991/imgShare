@@ -2,9 +2,13 @@
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2>{{image.title}}</h2>
+
+            {{#if user}}
             <button class="btn btn-danger" id="btn-delete" data-id="{{image.uniqueId}}">
                 <i class="fa fa-times"></i>Delete
             </button>
+            {{/if}}
+
         </div>
         <div class="card-body">
             <p>{{image.description}}</p>
@@ -13,7 +17,11 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-between align-items-center">
-            <button class="btn btn-success" id="btn-like" data-id="{{image.filename}}">
+            {{#if status}}
+                <button class="btn btn-primary" id="btn-like" data-id="{{image.filename}}">
+            {{else}}
+                <button class="btn btn-secondary" id="btn-like" data-id="{{image.filename}}">
+            {{/if}}
                 <i class="fas fa-thumbs-up"></i>Like
             </button>
             <p>
