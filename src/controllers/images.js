@@ -14,7 +14,13 @@ module.exports = {
         if (req.user) {
             const user = await UserLike.findOne({ user: req.user.email, imgId: String(image._id) });
             if (user) {
-                viewModel.status = user.status;
+                viewModel.status = user.status;       
+            }
+
+            if (image.username === req.user.email) {
+                viewModel.delete = true;
+            }else{
+                viewModel.delete = false;
             }
         }
 
@@ -116,7 +122,7 @@ module.exports = {
     },
 
     remove: async(req, res) => {
-        const image = await Image.findOne({ filename: { $regex: String(req.params.images_id) } }, { username: req.user.email });
+        const image = await Image.findOne({ filename: { $regex: String(req.params.images_id)},  username: req.user.email });
         if (image) {
             await fs.unlink(path.resolve('./src/public/upload/' + image.filename));
             await Comment.deleteOne({ image_id: image._id });
