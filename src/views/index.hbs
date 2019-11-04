@@ -1,5 +1,5 @@
-<div class="col-md-8">
-    <div class="card">
+<div class="row d-flex justify-content-center">
+    <div class="card w-75">
         <div class="card-header bg-dark">
             <h3 class="card-title text-white">
                 <i class="fas fa-images"></i>
@@ -32,27 +32,41 @@
             </form>
         </div>
     </div>
-    <div class="card mt-2">
+</div>
+
+<div class="row d-flex justify-content-center">
+    <div class="card mt-2 w-75 ">
         <div class="card-header bg-dark text-white">
             <h3> <i class="far fa-images"></i>Recent Upload</h3>
-            <div class="card-body">
-
+            <div class="card-body" style="width: 950px">
                 <div class="row">
-                    {{#each images}}
-                    <div class="col-md-4">
-                        <a href="/images/{{uniqueId}}">
-                            <img src="/public/upload/{{filename}}" alt="" class="w-100 h-100 img-thumbnail">
-                        </a>
+                    <div class="swiper-container gallery-top">
+                        <div class="swiper-wrapper">
+                            {{#each images}}
+                            <div class="swiper-slide text-center">
+                                <a href="/images/{{uniqueId}}">
+                                    <img src="/public/upload/{{filename}}" alt="" class="img-thumbnail"
+                                        style="width: 800px;">
+                                </a>
+                            </div>
+
+                            {{/each}}
+                        </div>
+                        <div class="swiper-button-next swiper-button-white"></div>
+                        <div class="swiper-button-prev swiper-button-white"></div>
                     </div>
-                    {{/each}}
+                    <div class="swiper-container gallery-thumbs">
+                        <div class="swiper-wrapper">
+                            {{#each images}}
+                            <div class="swiper-slide text-center">
+                                <img src="/public/upload/{{filename}}" alt="" class="img-thumbnail"
+                                    style="width: 100px;">
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="col-md-4">
-    {{>stats}}
-    {{>popular}}
-    {{>comments}}
 </div>

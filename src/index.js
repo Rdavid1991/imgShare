@@ -9,7 +9,7 @@ require('./database');
 require('./controllers/local-auth');
 require('colors');
 
-console.log(arte.textSync("Hola Mundo", "Sub-Zero").blue)
+console.log(arte.textSync("Hola Mundo", "Sub-Zero").blue);
 
 app.listen(app.get('port'), () => {
     console.log(`Server on port ${app.get('port')}`.yellow);

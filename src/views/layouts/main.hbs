@@ -12,7 +12,7 @@
     {{!-- Font Awesome --}}
     <link rel="stylesheet" href="/public/fontawesome/css/all.css">
     <link rel="icon" href="/public/favicon.ico" type="image/x-icon">
-    <script src="/public/fontawesome/js/all.js"></script>
+    <link rel="stylesheet" href="/public/css/swiper.min.css">
 
     <title>ImgShare</title>
 </head>
@@ -34,14 +34,33 @@
     </nav>
 
     <div class="container-fluid p-4">
-        <div class="row">
-            {{{ body }}}
-        </div>
+        {{{ body }}}
     </div>
 
     {{!-- Script --}}
     <script src="/public/jquery/jquery-3.4.1.js"></script>
     <script src="/public/js/script.js"></script>
+    <script src="/public/js/swiper.min.js"></script>
+    <script>
+        var galleryThumbs = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            slidesPerView: 4,
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        var galleryTop = new Swiper('.gallery-top', {
+            spaceBetween: 10,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            thumbs: {
+                swiper: galleryThumbs
+            }
+        });
+    </script>
+    <script src="/public/fontawesome/js/all.js"></script>
 </body>
 
 </html>
