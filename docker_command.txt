@@ -1,3 +1,12 @@
 docker build -t nodeapp .
 
 docker run -it -p 3000:3000 nodeapp
+
+--Alinear al centro objetos html
+
+display: flex;
+flex-direction: column;
+min-height: 80vh;
+min-width: 100vw;
+align-items: center;
+justify-content: center;
