@@ -18,7 +18,7 @@ services:
     image: imgshare
     ports:
       - "3000:3000"
-    volumes: 
-      - "C:/volumes/app:/home/app/src/public/upload"
+    #volumes: 
+     # - "C:/volumes/app:/home/app/src/public/upload"
     depends_on:
       - mongo
